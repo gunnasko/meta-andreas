@@ -1,0 +1,42 @@
+From a4e6cd60dc98d495ec06c0e800cf9f4c22f4dc83 Mon Sep 17 00:00:00 2001
+From: Gunnar Andreas Skogvold <andreas.skogvold@gmail.com>
+Date: Tue, 22 Dec 2015 09:36:06 +0100
+Subject: [PATCH 1/1] Changed CMAKE to work with oe-rpi
+
+---
+ CMakeLists.txt | 6 +-----
+ 1 file changed, 1 insertion(+), 5 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 9dc365d..42f18fa 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -22,7 +22,6 @@ cmake_minimum_required(VERSION 2.8)
+ set(ROOTFSPATH $ENV{ROOTFSPATH})
+ set(USERLANDPATH $ENV{USERLANDPATH})
+ 
+-execute_process(COMMAND uname -m OUTPUT_VARIABLE MACHINE)
+ 
+ if(NOT MACHINE MATCHES "arm*")
+ 	set(TOOLPATH $ENV{TOOLPATH})
+@@ -98,9 +97,6 @@ else()
+ 	add_definitions(-O3)
+ endif()					
+ 					
+-link_directories(
+-				${ROOTFSPATH}/opt/vc/lib
+-				)
+ 					
+ add_executable(motion 	
+ 				alg.c
+@@ -153,6 +149,6 @@ target_link_libraries(motion
+ 						mmal_core
+ 						mmal_util
+ 						mmal_vc_client
+-						-Xlinker -rpath-link=${ROOTFSPATH}/usr/lib/arm-linux-gnueabihf -Xlinker -rpath-link=${ROOTFSPATH}/lib/arm-linux-gnueabihf
++
+ 						)
+ 
+-- 
+1.9.1
+
